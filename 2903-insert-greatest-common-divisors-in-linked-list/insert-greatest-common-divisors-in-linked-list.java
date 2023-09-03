@@ -25,9 +25,8 @@ class Solution {
 
             }
             res.next = new ListNode(a);
-            res = res.next;
-            res.next = new ListNode(temp);
-            res = res.next;
+            res.next.next = new ListNode(temp);
+            res = res.next.next;
             head= head.next;
         }
         res.next = new ListNode(head.val);
