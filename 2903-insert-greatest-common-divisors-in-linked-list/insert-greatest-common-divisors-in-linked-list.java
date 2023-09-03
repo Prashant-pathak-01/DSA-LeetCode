@@ -17,8 +17,12 @@ class Solution {
             int temp= 1;
             int a = head.val;
             int b = head.next.val;
-            for(int i=1;i<=Math.min(a,b); i++){
-                if(a%i==0 && b%i==0) temp= i;
+            for(int i=Math.min(a,b); i>=1; i--){
+                if(a%i==0 && b%i==0) {
+                    temp = i;
+                    break;
+                    }
+
             }
             res.next = new ListNode(a);
             res = res.next;
