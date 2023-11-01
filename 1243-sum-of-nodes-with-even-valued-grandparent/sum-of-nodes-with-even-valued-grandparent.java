@@ -23,14 +23,16 @@ class Solution {
             int size = q.size();
             for(int i=0; i<size; i++){
                 TreeNode temp = q.poll();
+                boolean flag = false;
+                if(temp.val%2==0) flag = true;
                 if(temp.left!=null){
-                    if(temp.val%2==0 && temp.left.left!=null) sum+=temp.left.left.val;
-                    if(temp.val%2==0 && temp.left.right!=null) sum+=temp.left.right.val;
+                    if(flag && temp.left.left!=null) sum+=temp.left.left.val;
+                    if(flag && temp.left.right!=null) sum+=temp.left.right.val;
                     q.add(temp.left);
                 }
                 if(temp.right!=null){
-                    if(temp.val%2==0 && temp.right.left!=null) sum+=temp.right.left.val;
-                    if(temp.val%2==0 && temp.right.right!=null) sum+=temp.right.right.val;
+                    if(flag && temp.right.left!=null) sum+=temp.right.left.val;
+                    if(flag && temp.right.right!=null) sum+=temp.right.right.val;
                     q.add(temp.right);
                 }
                 
