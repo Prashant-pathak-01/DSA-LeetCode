@@ -2,7 +2,7 @@ class Solution {
     public int getWinner(int[] arr, int k) {
         int prev_winner = arr[0];
         int count = 0;
-        List<Integer> list = new ArrayList<>();
+        Queue<Integer> list = new LinkedList<>();
         int max = arr[0];
         for(int i=1; i<arr.length; i++) {
             list.add(arr[i]);
@@ -10,14 +10,14 @@ class Solution {
         }
         if(k>=arr.length) return max;
         for(int i=1; i>0; i++){
-            if(prev_winner>=list.get(0)){
-                int temp = list.remove(0);
+            if(prev_winner>=list.peek()){
+                int temp = list.remove();
                 list.add(temp);
                 count++;
                 if(count==k) return prev_winner;
             } else{
                 list.add(prev_winner);
-                prev_winner = list.remove(0);
+                prev_winner = list.remove();
                 count = 1;
                 if(count==k) return prev_winner;
             }
