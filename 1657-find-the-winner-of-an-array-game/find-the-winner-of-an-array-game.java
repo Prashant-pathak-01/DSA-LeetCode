@@ -14,13 +14,12 @@ class Solution {
                 int temp = list.remove();
                 list.add(temp);
                 count++;
-                if(count==k) return prev_winner;
             } else{
                 list.add(prev_winner);
                 prev_winner = list.remove();
                 count = 1;
-                if(count==k) return prev_winner;
             }
+                if(count==k) return prev_winner;
         }
         return max;
     }
