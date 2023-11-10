@@ -8,13 +8,13 @@ class Solution {
         while(!queue.isEmpty()){
             int temp = queue.poll();
             for(int i=0; i<rooms.get(temp).size(); i++){
-                if(!set.contains(rooms.get(temp).get(i)) && rooms.get(temp).get(i)!=0){
+                if(!set.contains(rooms.get(temp).get(i))){
                     queue.add(rooms.get(temp).get(i));
                 }
             }
             set.add(temp);
         }
-        System.out.println(set);
-        return set.size()+1==rooms.size();
+        set.add(0);
+        return set.size()==rooms.size();
     }
 }
