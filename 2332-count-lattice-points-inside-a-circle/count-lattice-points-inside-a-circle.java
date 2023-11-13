@@ -4,10 +4,10 @@ class Solution {
         for(int i=0; i<circles.length; i++){
             int a = circles[i][0];
             int b = circles[i][1]; 
-            
-            for(int j=a-circles[i][2]; j<=a+circles[i][2]; j++){
-                for(int k=b-circles[i][2]; k<=b+circles[i][2]; k++){
-                    if((j-a)*(j-a)+(k-b)*(k-b)<=circles[i][2]*circles[i][2]) list.add(j+" "+k);
+            int c = circles[i][2];
+            for(int j=a-c; j<=a+c; j++){
+                for(int k=b-c; k<=b+c; k++){
+                    if((j-a)*(j-a)+(k-b)*(k-b)<=c*c) list.add(j+" "+k);
             }
                 }
             }
