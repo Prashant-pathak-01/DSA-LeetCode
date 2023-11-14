@@ -4,7 +4,7 @@ class Solution {
         Set<Character> set = new HashSet<>();
         for(int i=0; i<s.length(); i++){
             boolean flag = false;
-            if(set.contains(s.charAt(i))) continue;
+            if(!set.contains(s.charAt(i))) 
             for(int j=s.length()-1; j>i; j--){
                 if(flag){
                     map.get(s.charAt(i)).add(s.charAt(j));
