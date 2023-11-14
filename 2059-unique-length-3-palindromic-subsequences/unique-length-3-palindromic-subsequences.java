@@ -2,6 +2,7 @@ class Solution {
     public int countPalindromicSubsequence(String s) {
         Map<Character,Set<Character>> map =new HashMap<>();
         Set<Character> set = new HashSet<>();
+        int sum  = 0;
         for(int i=0; i<s.length(); i++){
             char temp1 = s.charAt(i);
             if(!set.contains(temp1)) {
@@ -19,14 +20,10 @@ class Solution {
                         }
                     }   
                 }
+                if(map.containsKey(s.charAt(i))) sum+=map.get(s.charAt(i)).size();
             }
         }
 
-        int sum  = 0;
-        for(Map.Entry<Character,Set<Character>> entry : map.entrySet()){
-            sum+=entry.getValue().size();
-            System.out.println(entry.getValue());
-        }
         return sum;
     }
 }
