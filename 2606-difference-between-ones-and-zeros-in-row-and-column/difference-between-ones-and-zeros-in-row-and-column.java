@@ -2,9 +2,12 @@ class Solution {
     public int[][] onesMinusZeros(int[][] matrix) {
         Map<Integer,Integer> row = new HashMap<>();
         Map<Integer,Integer> col = new HashMap<>();
-        for(int i=0; i<matrix.length; i++){
+        int n = matrix.length;
+        int m = matrix[0].length;
+
+        for(int i=0; i<n; i++){
             row.put(i,0);
-            for(int j=0; j<matrix[0].length; j++){
+            for(int j=0; j<m; j++){
                 if(i==0){
                     col.put(j,0);
                 }
@@ -14,9 +17,11 @@ class Solution {
                 }
             }
         }
-        for(int i=0; i<matrix.length; i++){
-            for(int j=0; j<matrix[0].length; j++){
-                matrix[i][j] = row.get(i)+col.get(j)-(matrix.length-row.get(i))-(matrix[0].length-col.get(j));
+        for(int i=0; i<n; i++){
+            int a = row.get(i);
+            for(int j=0; j<m; j++){
+                int b = col.get(j);
+                matrix[i][j] = a+b-(n-a)-(m-b);
             }
         }
         return matrix;
