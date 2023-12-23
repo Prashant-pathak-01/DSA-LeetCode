@@ -8,17 +8,11 @@ class Solution {
                 map.put(nums[i],1);
             }
         }
-        int i= 0;
-        int arr[][] = new int[nums.length][2];
-        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
-            arr[i][0] = entry.getKey(); 
-            arr[i][1] = entry.getValue();
-            i++;
-        }
-        Arrays.sort(arr,(a,b)->Integer.compare(b[1],a[1]));
+        List<Integer> list = new ArrayList<>(map.keySet());
+        Collections.sort(list,(a,b)->Integer.compare(map.get(b),map.get(a)));
         int res[] = new int[k];
         for(int j=0;j<k; j++){
-            res[j] = arr[j][0];
+            res[j] = list.get(j);
         }
 
         return res;
