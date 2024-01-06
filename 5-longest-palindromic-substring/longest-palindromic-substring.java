@@ -3,7 +3,8 @@ class Solution {
         if(s.length()==0 || s.length()==1) return s;
         int res = 0;
         String rester = "";
-        boolean dp[][] = new boolean[s.length()][s.length()];
+        int dp[][] = new int[s.length()][s.length()];
+        for(int i=0; i<s.length(); i++) Arrays.fill(dp[i],-1);
         for(int i=0; i<s.length(); i++){
             for(int j=i; j<s.length(); j++){
                 if(j-i+1>res && isPalindrome(s,i,j,dp)){
@@ -14,10 +15,14 @@ class Solution {
         }
         return rester;
     }
-    public Boolean isPalindrome(String s,int i,int j,boolean [][]dp){
+    public Boolean isPalindrome(String s,int i,int j,int [][]dp){
         if(i>=j) return true;
-        if(dp[i][j]!=false) return dp[i][j];
-        if(s.charAt(i)!=s.charAt(j)) return dp[i][j] = false;
-        return dp[i][j] = isPalindrome(s,i+1,j-1,dp);
+        if(dp[i][j]!=-1) return dp[i][j]==1;
+        if(s.charAt(i)!=s.charAt(j)) {
+            dp[i][j] = 0;
+            return dp[i][j]==1;
+        }
+        dp[i][j] = isPalindrome(s,i+1,j-1,dp)?1:0;
+        return dp[i][j]==1;
     }
 }
