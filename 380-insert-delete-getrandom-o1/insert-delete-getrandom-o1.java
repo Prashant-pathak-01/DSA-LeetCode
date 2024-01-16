@@ -17,7 +17,6 @@ class RandomizedSet {
     }
     
     public int getRandom() {
-        System.out.println((int)(Math.random()*list.size()));
         return list.get((int)(Math.random()*list.size()));
     }
 }
