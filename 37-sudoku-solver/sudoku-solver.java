@@ -51,14 +51,12 @@ class Solution {
     private boolean solveTheSudoku(int i,int j){
         if(i==9) return true;
         if(j==arr.length) return solveTheSudoku(i+1,0);
-        
+        if(!modify[i][j]) return solveTheSudoku(i,j+1);
         for(int k=1; k<=9; k++){
-            if(modify[i][j]){
                 arr[i][j] = k;
                 if(checkRow(i) && checkCol(j) && checksubBox(i,j) && solveTheSudoku(i,j+1)){
                     return true;
             }
-            }else return solveTheSudoku(i,j+1);
         }
         arr[i][j] = 0;
         return false;
