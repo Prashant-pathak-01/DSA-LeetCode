@@ -8,8 +8,7 @@ class Solution {
         int res = 0;
         for(int i=0; i<nums.length; i++){
             for(int j=i; j<nums.length; j++){
-                int temp = sum[j]-sum[i]+nums[i];
-                if(temp==k) res++;
+                if(k==sum[j]-sum[i]+nums[i]) res++;
             }
         }
         return res;
