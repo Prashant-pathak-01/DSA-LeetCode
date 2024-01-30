@@ -11,7 +11,7 @@ class Solution {
         for(int i=0; i<s.length(); i++){
             for(int j=i; j<s.length(); j++){
                 if(j-i+1>prev && isPalindrome(s.substring(i,j+1))) {
-                    prev = j-i;
+                    prev = j-i+1;
                     res = s.substring(i,j+1);
                 }
             }
