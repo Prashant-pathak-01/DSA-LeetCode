@@ -1,15 +1,15 @@
 class Solution {
-    public void generatelexi(int x, int n,List<Integer> list){
-        if(x>n) return;
-        if(x!=0) list.add(x);
-        for(int i=0; i<=9; i++){
-            if(x==0 && i==0) continue;
-            generatelexi(x*10+i,n,list);
+    public void generateAllLexi(int n, List<Integer> list, int sum, int i){
+        if(sum>n) return;
+        if(sum!=0) list.add(sum);
+        for(int x=0; x<=9; x++){
+            if(sum==0 && x==0) continue;
+            generateAllLexi(n,list,sum*10+x,x);
         }
     }
     public List<Integer> lexicalOrder(int n) {
         List<Integer> list = new ArrayList<>();
-        generatelexi(0,n,list);
+        generateAllLexi(n,list,0,0);
         return list;
     }
 }
