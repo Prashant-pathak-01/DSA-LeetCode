@@ -5,15 +5,13 @@ class Solution {
             return true;
         }
         if(dp[i][j]!=-1) return dp[i][j]==1;
-        while(i<j){
-            if(str.charAt(i)==str.charAt(j)) {
-                return isPalindrome(str,i+1,j-1,dp);
-            }else{
-                dp[i][j]=0;
-                return false;
-            }
+        if(str.charAt(i)==str.charAt(j)) {
+            dp[i+1][j-1] = isPalindrome(str,i+1,j-1,dp)?1:0;
+            return dp[i+1][j-1]==1;
+        }else{
+            dp[i][j]=0;
+            return false;
         }
-        return true;
     }
     public int countSubstrings(String s) {
         int res = 0;
