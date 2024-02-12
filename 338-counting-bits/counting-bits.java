@@ -6,8 +6,8 @@ class Solution {
             int count = 0;
             int temp = i;
             while(temp!=0){
-                if(temp%2==1) count++;
-                temp/=2;
+                count++;
+                temp=temp&(temp-1);
             }
             arr[i] = count;
         }
