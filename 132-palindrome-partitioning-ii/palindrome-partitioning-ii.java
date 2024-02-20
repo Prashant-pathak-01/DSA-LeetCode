@@ -7,8 +7,8 @@ class Solution {
         if(s.length()==indx){
             return 0;
         }
-        if(isPalindrome(s,indx,s.length()-1)) return dp[indx]  = 0;
         if(dp[indx]!=-1) return dp[indx];
+        if(isPalindrome(s,indx,s.length()-1)) return dp[indx]  = 0;
         int res = Integer.MAX_VALUE;
         for(int i=indx; i<s.length(); i++){
             if(isPalindrome(s,indx,i)){
