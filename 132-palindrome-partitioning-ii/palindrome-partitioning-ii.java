@@ -1,27 +1,25 @@
 class Solution {
-    public boolean isPalindrome(String s){
-        int i= 0;
-        int j = s.length()-1;
+    public boolean isPalindrome(String s, int i, int j){
         while(i<j) if(s.charAt(i++)!=s.charAt(j--)) return false;
         return true;
     }
-    public int generate(String s, int dp[]){
-        if(s.length()==0){
+    public int generate(String s, int dp[],int indx){
+        if(s.length()==indx){
             return 0;
         }
-        if(isPalindrome(s)) return dp[s.length()-1]  = 0;
-        if(dp[s.length()-1]!=-1) return dp[s.length()-1];
-        int res = s.length()-1;
-        for(int i=0; i<s.length(); i++){
-            if(isPalindrome(s.substring(0,i+1))){
-                res = Math.min(res,1+generate(s.substring(i+1),dp));
+        if(isPalindrome(s,indx,s.length()-1)) return dp[indx]  = 0;
+        if(dp[indx]!=-1) return dp[indx];
+        int res = Integer.MAX_VALUE;
+        for(int i=indx; i<s.length(); i++){
+            if(isPalindrome(s,indx,i)){
+                res = Math.min(res,1+generate(s,dp,i+1));
             }
         }
-        return dp[s.length()-1] = res;
+        return dp[indx] = res;
     }
     public int minCut(String s) {
         int dp[] = new int[s.length()];
         Arrays.fill(dp,-1);
-        return generate(s,dp);
+        return generate(s,dp,0);
     }
 }
