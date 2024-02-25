@@ -1,59 +1,53 @@
 class Solution {
-    public void dfs(ArrayList<ArrayList<Integer>>adj,int []vis,int st){
-        vis[st]=1;
-        for(int i:adj.get(st)){
-            if(vis[i]==0){
-                dfs(adj,vis,i);
-            }
-        }
-    }
-public static void allprime(int n,HashMap<Integer,ArrayList<Integer>>map,int st){
-        while(n%2==0){
+    public void genFactors(int n, int indx, Map<Integer,List<Integer>> map){
+        if(n%2==0){
             map.put(2,map.getOrDefault(2,new ArrayList<>()));
-            ArrayList<Integer>temp=map.get(2);
-            temp.add(st);
-            map.put(2,temp);
-            n/=2;
+            map.get(2).add(indx);
         }
-        for(int i=3; i<=Math.sqrt(n); i+=2){
-            while(n%i==0){
-                map.put(i,map.getOrDefault(i,new ArrayList<>()));
-                ArrayList<Integer>temp=map.get(i);
-                temp.add(st);
-                map.put(i,temp);
-                n/=i;
+        while(n%2==0) n/=2;
+        for(int x =3; x<=Math.sqrt(n); x+=2){
+            while(n%x==0){
+                map.put(x,map.getOrDefault(x,new ArrayList<>()));
+                map.get(x).add(indx);
+                n/=x;
             }
         }
-        if(n>2){
+        if(n!=1){
             map.put(n,map.getOrDefault(n,new ArrayList<>()));
-            ArrayList<Integer>temp=map.get(n);
-            temp.add(st);
-            map.put(n,temp);
+            map.get(n).add(indx);
         }
     }
+    public void dfs(ArrayList<ArrayList<Integer>>graph,boolean []vis,int indx){
+        vis[indx]=true;
+        for(int i:graph.get(indx)){
+            if(!vis[i]){
+                dfs(graph,vis,i);
+            }
+        }
+    }
+
     public boolean canTraverseAllPairs(int[] nums) {
-        ArrayList<ArrayList<Integer>>adj=new ArrayList<>();
-        HashMap<Integer,ArrayList<Integer>>map=new HashMap<>();
-        
+        Map<Integer,List<Integer>> map = new HashMap<>();
+        for(int i=0; i<nums.length; i++){
+            genFactors(nums[i],i,map);
+        }
+
+        ArrayList<ArrayList<Integer>>graph=new ArrayList<>();
         int n=nums.length;
         for(int i=0;i<n;i++){
-            adj.add(new ArrayList<>());
-        }    
-        for(int i=0;i<n;i++){
-            allprime(nums[i],map,i);
-        }
-        
-        for(ArrayList<Integer>temp:map.values()){
+            graph.add(new ArrayList<>());
+        }  
+        for(List<Integer>temp:map.values()){
             for(int i=1;i<temp.size();i++){
-                adj.get(temp.get(i-1)).add(temp.get(i));
-                adj.get(temp.get(i)).add(temp.get(i-1));
+                graph.get(temp.get(i-1)).add(temp.get(i));
+                graph.get(temp.get(i)).add(temp.get(i-1));
             }
         }
-        int []vis=new int[n];
-        dfs(adj,vis,0);
-        for(int i=0;i<n;i++){
-            if(vis[i]==0)return false;
-        }
+        boolean visited[] = new boolean[nums.length];
+        
+        dfs(graph,visited,0);
+
+        for(boolean i:visited) if(!i) return false;
         return true;
     }
 }
