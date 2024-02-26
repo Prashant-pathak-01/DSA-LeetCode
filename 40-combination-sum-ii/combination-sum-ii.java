@@ -1,24 +1,22 @@
 class Solution {
-    public void generate(List<List<Integer>> list, List<Integer> temp, int []arr, int tar, int indx){
-        if(tar==0){
-            if(!list.contains(temp)) list.add(new ArrayList<>(temp));
-            return;
-        }
-        if(indx>=arr.length) return;
+    public void generate(int []arr, List<List<Integer>> list,List<Integer> temp, int i, int tar){
         if(tar<0) return;
-        for(int i=indx; i<arr.length; i++){
-            temp.add(arr[i]);
-            generate(list,temp,arr,tar-arr[i],i+1);
+        if(tar==0){
+            list.add(new ArrayList<>(temp));
+            return;
+        }        
+        if(i>=arr.length) return ;
+        for(int x=i; x<arr.length; x++){
+            temp.add(arr[x]);
+            generate(arr,list,temp,x+1,tar-arr[x]);
             temp.remove(temp.size()-1);
-            for(int j= i; j<arr.length; j++){
-                if(i<arr.length-1 && arr[i]==arr[i+1]) i++;
-            }
+            while(x<arr.length-1 && arr[x]==arr[x+1]) x++;
         }
     }
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         List<List<Integer>> list = new ArrayList<>();
         Arrays.sort(candidates);
-        generate(list,new ArrayList<>(), candidates,target,0);
+        generate(candidates,list,new ArrayList<>(),0,target);
         return list;
     }
 }
