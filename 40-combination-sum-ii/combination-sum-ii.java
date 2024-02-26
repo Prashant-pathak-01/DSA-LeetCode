@@ -7,10 +7,10 @@ class Solution {
         }        
         if(i>=arr.length) return ;
         for(int x=i; x<arr.length; x++){
+            if(x>i && arr[x]==arr[x-1]) continue;
             temp.add(arr[x]);
             generate(arr,list,temp,x+1,tar-arr[x]);
             temp.remove(temp.size()-1);
-            while(x<arr.length-1 && arr[x]==arr[x+1]) x++;
         }
     }
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
