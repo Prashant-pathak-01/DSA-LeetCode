@@ -1,20 +1,22 @@
 class Solution {
-    public void generateSub(int nums[], List<List<Integer>>list, int i,List<Integer> temp){
-        if(!list.contains(temp)){
-                list.add(new ArrayList<>(temp));
+    public void generate(List<List<Integer>> list, List<Integer> temp, int nums[], int i, boolean mark[]){
+        list.add(new ArrayList<>(temp));
+        for(int x=  i; x<nums.length; x++){
+            if(x>i && nums[x]==nums[x-1]) continue;
+            if(!mark[x]){
+                mark[x] = true;
+                temp.add(nums[x]);
+                generate(list,temp,nums,x+1,mark);
+                temp.remove(temp.size()-1);
+                mark[x] = false;
+            }
         }
-        if(i>=nums.length) return;   
-            temp.add(nums[i]);
-            generateSub(nums,list,i+1,temp);
-            temp.remove(temp.size()-1);
-            generateSub(nums,list,i+1,temp);
-
-        
     }
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
+        boolean arr[] = new boolean[nums.length];
         Arrays.sort(nums);
-        generateSub(nums,list,0,new ArrayList<>());
+        generate(list,new ArrayList<>(),nums,0,arr);
         return list;
     }
 }
