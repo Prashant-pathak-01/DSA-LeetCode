@@ -6,7 +6,7 @@ class Solution {
         int indx =  0;
         for(int i=0; r<mat.length && c<mat[0].length ; i++){
             if(i%2==0){
-                while(r>=0 && c>=0 && r<mat.length && c<mat[0].length){
+                while(r>=0 && c<mat[0].length){
                     res[indx++] = mat[r][c];
                     r--;
                     c++;
@@ -18,7 +18,7 @@ class Solution {
                     r++;
                 }
             }else{
-                while(r>=0 && c>=0 && r<mat.length && c<mat[0].length){
+                while(c>=0 && r<mat.length){
                     res[indx++] = mat[r][c];
                     r++;
                     c--;
