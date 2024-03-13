@@ -1,22 +1,15 @@
 class Solution {
     public int pivotInteger(int n) {
-        int arr[] = new int[n];
-        int sum = 0;
-        for(int i=0; i<n; i++) {
-            arr[i] = i+1;
-            sum = sum + arr[i];
-        }
-        int c =0;
-        for(int i=0; i<n; i++) {
-            c = c+ arr[i];
-            sum = sum - i;
-            if(c == sum) {
-                return arr[i];
-            }
+        int rsum = (n*(n+1))/2;
+        int lsum = 0;
+        int i = 1;
+        while(lsum<=rsum){
+            lsum+=i;
+            if(lsum==rsum) return i;
+            rsum-=i;
+            i++;
         }
 
         return -1;
-
-
     }
 }
