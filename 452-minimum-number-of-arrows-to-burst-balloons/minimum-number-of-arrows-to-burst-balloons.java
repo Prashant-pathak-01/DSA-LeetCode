@@ -8,7 +8,6 @@ class Solution {
         int res = 0;
         long prev = arr[0][1];
         for(int i=1; i<arr.length; i++){
-            System.out.println(arr[i][0]+" "+arr[i][1]);
             if(arr[i][0]<=prev){
                 prev = Math.min(prev,arr[i][1]);
             }
