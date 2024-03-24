@@ -1,7 +1,6 @@
 class Solution {
     public int[] kmapCalc(String str){
         int[] lps = new int[str.length()];
-        
         for (int i = 1; i < str.length(); i++) {
             int prevIdx = lps[i - 1];
             while (prevIdx > 0 && str.charAt(i) != str.charAt(prevIdx)) {
@@ -9,7 +8,6 @@ class Solution {
             }
             lps[i] = prevIdx + (str.charAt(i) == str.charAt(prevIdx) ? 1 : 0);
         }
-
         return lps;
     }
     public int countMatchingSubarrays(int[] nums, int[] pattern) {
