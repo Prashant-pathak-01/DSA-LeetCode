@@ -8,11 +8,7 @@ class Solution {
                     char b = stack.pop();
                     char a = stack.pop();
                     if(b=='b' && a=='a') continue;
-                    else {
-                        stack.push(a);
-                        stack.push(b);
-                        stack.push(s.charAt(i));
-                    }
+                    else return false;
                 }else return false;
             }else stack.push(s.charAt(i));
         }
