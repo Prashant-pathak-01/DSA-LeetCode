@@ -19,29 +19,20 @@ class Solution {
         boolean flag = false;
         if(q.isEmpty()) flag = true;
         int res = 0;
+        int r[] = {0,0,1,-1};
+        int c[] = {1,-1,0,0};
         while(!q.isEmpty()){
             int size = q.size();
             for(int i=0; i<size; i++){
                 Pair pair = q.poll();
-                if(pair.a<grid.length-1 && grid[pair.a+1][pair.b]==1) {
-                    q.add(new Pair(pair.a+1,pair.b));
-                    grid[pair.a+1][pair.b]++;    
+                for(int k=0; k<4; k++){
+                    int row = pair.a+r[k];
+                    int col = pair.b+c[k];
+                    if(row<grid.length && col<grid[0].length && row>=0 && col>=0 && grid[row][col]==1) {
+                        q.add(new Pair(row,col));
+                        grid[row][col]++;    
+                    }
                 }
-                if(pair.b<grid[0].length-1 && grid[pair.a][pair.b+1]==1) {
-                    q.add(new Pair(pair.a,pair.b+1));
-                    grid[pair.a][pair.b+1]++;    
-
-                }
-                if(pair.a>=1 && grid[pair.a-1][pair.b]==1){
-                    q.add(new Pair(pair.a-1,pair.b));
-                    grid[pair.a-1][pair.b]++;    
-
-                }
-                if(pair.b>=1 && grid[pair.a][pair.b-1]==1){
-                    q.add(new Pair(pair.a,pair.b-1));
-                    grid[pair.a][pair.b-1]++;    
-                }
-
             }
             res++;
         }
