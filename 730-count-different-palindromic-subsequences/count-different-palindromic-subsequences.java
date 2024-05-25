@@ -15,7 +15,7 @@ class Solution {
             else res=(res+2)%MOD;
         }
         else res = (getMaxPal(s,i+1,j,dp)+ getMaxPal(s,i,j-1,dp)- getMaxPal(s,i+1,j-1,dp))%MOD;
-        return dp[i][j] = res<0? res+MOD:res%MOD;
+        return dp[i][j] = res<0? res+MOD:res;
     }
     public int countPalindromicSubsequences(String s) {
         int dp[][] = new int[s.length()][s.length()];
