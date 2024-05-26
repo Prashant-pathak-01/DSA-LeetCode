@@ -15,7 +15,7 @@ class Solution {
         for(int i=0; i<numCourses; i++) if(degree[i]==0) q.add(i);
         while(!q.isEmpty()){
             int course = q.poll();
-            if(y==numCourses) return new int[0];
+            //if(y==numCourses) return new int[0];
             res[y++] = course;
             for(int x:list.get(course)){
                 degree[x]--;
