@@ -3,13 +3,13 @@ class Solution {
         List<Integer> res = new ArrayList<>();
         int i = 0;
         while(Math.pow(x,i)<=bound){
-            int temp = 1;
-            int pow = (int)Math.pow(x,i);
-            int num = pow+temp;
+            int numA = (int)Math.pow(x,i);
+            int numB = 1;
+            int num = numA+numB;
             while(num<=bound){
                 if(num<=bound && !res.contains(num)) res.add(num);
-                temp*=y;
-                num = pow+temp;
+                numB*=y;
+                num = numA+numB;
                 if(y==1) break;
             }
             i++;
