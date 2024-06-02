@@ -3,18 +3,18 @@ class Solution {
         int res =0 ;
         int j = mid+1;
         int count = 0;
-        int x = i;
         while(j<=n){
+        int x = i;
             while(x<=mid){
                 if(nums[x]>(long)nums[j]*2) count++;
                 else break;
                 x++;
             }
-            res+=count;
+            res+=x-i;
             j++;
         }
         j = mid+1;
-        x = i;
+        int x = i;
         List<Integer> list = new ArrayList<>();
         while(i<=mid && j<=n ){
             if(nums[i]>=nums[j]) list.add(nums[i++]);
