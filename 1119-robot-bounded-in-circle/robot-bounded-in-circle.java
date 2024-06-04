@@ -3,7 +3,6 @@ class Solution {
         int x =0 ;
         int y = 0;
         int dir = 0;
-        instructions = instructions;
         for(int i=0; i<instructions.length(); i++){
             if(instructions.charAt(i)=='L'){
                 dir--;
