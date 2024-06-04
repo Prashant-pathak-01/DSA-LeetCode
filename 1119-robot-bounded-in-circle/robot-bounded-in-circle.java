@@ -3,7 +3,7 @@ class Solution {
         int x =0 ;
         int y = 0;
         int dir = 0;
-        instructions = instructions+instructions+instructions+instructions;
+        instructions = instructions;
         for(int i=0; i<instructions.length(); i++){
             if(instructions.charAt(i)=='L'){
                 dir--;
@@ -24,6 +24,6 @@ class Solution {
                 }
             }
         }
-        return x==0 && y==0;
+        return x==0 && y==0 || dir!=0;
     }
 }
