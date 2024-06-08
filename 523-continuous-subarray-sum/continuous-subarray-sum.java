@@ -3,8 +3,6 @@ class Solution {
         Set<Integer> set = new HashSet<>();
         int sum = 0;
         int prev = 0;
-        //(sumJ-sumI)%k==0  ==> sumJ%k==sumI%k 
-        // add prev because difference should be greater then 1;
         for(int i=0; i<nums.length; i++){
             sum+=nums[i];
             sum%=k;
