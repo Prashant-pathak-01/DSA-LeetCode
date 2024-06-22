@@ -1,31 +1,15 @@
 class Solution {
     public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
-        int n = customers.length;
-        int ans = 0;
-        for (int i = 0; i < n; i++) {
-            if (grumpy[i] == 0) {
-                ans += customers[i];
-            }
+        int res= 0;
+        for(int i=0; i<customers.length; i++) if(grumpy[i]==0) res+=customers[i];
+        int max =0;
+        for(int i=0; i<minutes; i++) if(grumpy[i]==1) max+=customers[i];
+        int temp = max;
+        for(int i=minutes; i<customers.length; i++){
+            if(grumpy[i-minutes]==1) temp-=customers[i-minutes];
+            if(grumpy[i]==1) temp+=customers[i];
+            max = Math.max(max,temp);
         }
-        
-        int unsatis = 0;
-        for (int i = 0; i < minutes; i++) {
-            if (grumpy[i] == 1) {
-                unsatis += customers[i];
-            }
-        }
-        
-        int max = unsatis;
-        for (int i = minutes; i < n; i++) {
-            if (grumpy[i - minutes] == 1) {
-                unsatis -= customers[i - minutes];
-            }
-            if (grumpy[i] == 1) {
-                unsatis += customers[i];
-            }
-            max = Math.max(max, unsatis);
-        }
-        
-        return ans + max;
+        return res+max;
     }
 }
