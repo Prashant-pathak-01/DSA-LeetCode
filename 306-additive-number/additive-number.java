@@ -1,7 +1,6 @@
 class Solution {
     public boolean isValid(String num, long a, long b, long sum,int i ){
         if(i==num.length()) return true;
-        if(i>num.length()) return false;
         long currSum = 0;
         boolean res = false;
         long temp = 0;
@@ -18,7 +17,6 @@ class Solution {
     }
     public boolean isAdditiveNumber(String num) {
         if(num.length()<=2) return false;
-        
         long a = 0;
         for(int i=0; i<num.length()-2; i++){
             a = a*10+num.charAt(i)-'0';
