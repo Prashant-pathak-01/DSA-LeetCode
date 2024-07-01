@@ -1,9 +1,9 @@
 class Solution {
     int MOD = (int)1e9+7;
     public long getCount(int count){
-        if(count == 0) return 0;
-        if(count == 1) return 1;
-        return (count+getCount(count-1))%MOD;
+        long res =0 ;
+        for(int i=1; i<=count; i++) res+=i;
+        return res%MOD;
     }
     public int numSub(String s) {
         long res=0 ;
