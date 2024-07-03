@@ -1,22 +1,23 @@
-class Solution {
-    Map<TreeNode,Integer> map = new HashMap<>();
-    public int height(TreeNode root){
-        if(root==null) return 0;
-        int res= 1+Math.max(height(root.left),height(root.right));
-        map.put(root,res);
-        return res;
+class Pair{
+    int h;
+    boolean bal;
+    Pair(int h, boolean bal){
+        this.h = h;
+        this.bal = bal;
     }
-    public boolean solve(TreeNode root){
-        if(root==null) return true;
-        int left = map.get(root.left);
-        int right = map.get(root.right);
-        if(Math.abs(left-right)>1) return false;
-        return solve(root.left) && solve(root.right); 
+}
+class Solution {
+    
+    public Pair solve(TreeNode root){
+        if(root==null) return new Pair(0,true);
+        Pair left = solve(root.left);
+        Pair right = solve(root.right);
+        if(!left.bal || !right.bal || Math.abs(left.h-right.h)>1) return new Pair(0,false);
+        Pair res = new Pair(1+Math.max(left.h,right.h),true);
+        return res;
 
     }
     public boolean isBalanced(TreeNode root) {
-        height(root);
-        map.put(null,0);
-        return solve(root);
+        return solve(root).bal;
     }
 }
