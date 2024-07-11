@@ -4,10 +4,10 @@ class Solution {
         ListNode temp = res;
         while(l1!=null && l2!=null){
             if(l1.val>l2.val){
-                res.next = new ListNode(l2.val);
+                res.next = l2;
                 l2 = l2.next;
             }else{
-                res.next = new ListNode(l1.val);
+                res.next = l1;
                 l1 = l1.next;
             }
             res = res.next;
