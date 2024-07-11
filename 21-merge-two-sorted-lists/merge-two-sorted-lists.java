@@ -1,21 +1,22 @@
-
 class Solution {
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode res = new ListNode(0);
-        ListNode ans = res;
-        int x = 0;
-        int y = 0;
-        int i = 0;
-        while(list1!=null || list2!=null){
-            if(list1==null || (list2!=null && list1.val>list2.val)){
-                res.next = new ListNode(list2.val);
-                list2 = list2.next;
+    public ListNode merge(ListNode l1, ListNode l2){
+        ListNode res = new ListNode();
+        ListNode tem = res;
+        while(l1!=null && l2!=null ){
+            if(l1.val>l2.val){
+                res.next = new ListNode(l2.val);
+                l2 = l2.next;
             }else {
-                res.next = new ListNode(list1.val);
-                list1 = list1.next;
-                }
-            res  = res.next;
+                res.next = new ListNode(l1.val);
+                l1 = l1.next;    
+            }
+            res = res.next;
         }
-        return ans.next;
+        if(l1!=null) res.next = l1;
+        if(l2!=null) res.next = l2;
+        return tem.next;
+    }
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        return merge(list1,list2);
     }
 }
