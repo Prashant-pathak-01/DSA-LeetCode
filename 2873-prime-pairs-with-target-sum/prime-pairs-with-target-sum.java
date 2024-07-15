@@ -13,7 +13,7 @@ class Solution {
     public static boolean[] prime(int n) {
 	    boolean[]arr=new boolean[n+1];
 	    arr[0]=arr[1]=true;
-	    for(int i=2;i<arr.length;i++) {
+	    for(int i=2;i<=Math.sqrt(arr.length);i++) {
 		    if(!arr[i]) {
 			    for(long k=(long)i*i;k<arr.length;k+=i) {
 			    	arr[(int)k]=true;
