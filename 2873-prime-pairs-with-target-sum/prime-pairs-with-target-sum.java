@@ -1,20 +1,27 @@
 class Solution {
-    public boolean isPrime(int n){
-        if(n<2) return false;
-        for(int i=2; i<=Math.sqrt(n); i++) if(n%i==0) return false;
-        return true;
-    }
     public List<List<Integer>> findPrimePairs(int n) {
-        List<List<Integer>> list = new ArrayList<>();
-        if(n%2==1){
-            if(isPrime(n-2)) list.add(new ArrayList<>(Arrays.asList(2,n-2)));
-            return list;
-        }
-        for(int i=2; i<=n/2; i++){
-            if(isPrime(i) && isPrime(n-i)){
-                list.add(new ArrayList<>(Arrays.asList(i,n-i)));
-            } 
+        List<List<Integer>> list=new ArrayList<>();
+        boolean[] ans=prime(n+1);
+        for(int i=2;i<=n/2;i++){
+            if(!ans[i]){
+                int a=n-i;
+                if(!ans[a]&&i<=a){
+                    list.add(new ArrayList<>(Arrays.asList(i,a)));
+                }
+            }
         }
         return list;
     }
+    public static boolean[] prime(int n) {
+	boolean[]arr=new boolean[n+1];
+	arr[0]=arr[1]=true;
+	for(int i=2;i<arr.length;i++) {
+		if(!arr[i]) {
+			for(int k=2;k*i<arr.length;k++) {
+				arr[i*k]=true;
+			}
+		}
+	}
+	return arr;
+	}
 }
