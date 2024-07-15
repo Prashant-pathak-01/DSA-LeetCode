@@ -15,8 +15,8 @@ class Solution {
 	    arr[0]=arr[1]=true;
 	    for(int i=2;i<arr.length;i++) {
 		    if(!arr[i]) {
-			    for(int k=2;k*i<arr.length;k++) {
-			    	arr[i*k]=true;
+			    for(long k=(long)i*i;k<arr.length;k+=i) {
+			    	arr[(int)k]=true;
 		    	}
 		}
 	    }
