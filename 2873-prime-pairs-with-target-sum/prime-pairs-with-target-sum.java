@@ -4,9 +4,8 @@ class Solution {
         boolean[] ans=prime(n+1);
         for(int i=2;i<=n/2;i++){
             if(!ans[i]){
-                int a=n-i;
-                if(!ans[a]&&i<=a){
-                    list.add(new ArrayList<>(Arrays.asList(i,a)));
+                if(!ans[n-i]){
+                    list.add(new ArrayList<>(Arrays.asList(i,n-i)));
                 }
             }
         }
