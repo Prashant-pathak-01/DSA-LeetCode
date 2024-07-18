@@ -24,7 +24,6 @@ class Solution {
             }
         }
         int res= -1;
-        System.out.println(Arrays.toString(finalTime));
         for(int x=1; x<finalTime.length; x++){
             if(finalTime[x]==Integer.MAX_VALUE) return -1;
             res = Math.max(res,finalTime[x]);
