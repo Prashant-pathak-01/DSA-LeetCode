@@ -27,7 +27,7 @@ class Solution {
         System.out.println(Arrays.toString(finalTime));
         for(int x=1; x<finalTime.length; x++){
             if(finalTime[x]==Integer.MAX_VALUE) return -1;
-            if(x!=k) res = Math.max(res,finalTime[x]);
+            res = Math.max(res,finalTime[x]);
         }
         return res;
     }
