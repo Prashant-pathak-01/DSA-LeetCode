@@ -1,7 +1,6 @@
 class Solution {
-
     public void checkDistance(int i, int dis[], List<List<int []>> list){
-        PriorityQueue<int []> q = new PriorityQueue<>((a,b)->a[1]-b[1]);
+        Queue<int []> q = new LinkedList<>();
         q.add(new int[]{i,0});
         while(!q.isEmpty()){
             int temp[] = q.poll();
