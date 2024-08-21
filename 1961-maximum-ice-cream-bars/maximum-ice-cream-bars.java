@@ -1,12 +1,11 @@
 class Solution {
     public int maxIceCream(int[] costs, int coins) {
-        Arrays.sort(costs);
-        int i=0;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i:costs) pq.add(i);
         int count = 0;
-        while(i<costs.length && coins>=costs[i]){
+        while(!pq.isEmpty() && coins>=pq.peek()){
             count++;
-            coins-=costs[i];
-            i++;
+            coins-=pq.poll();
         }
         return count;
     }
