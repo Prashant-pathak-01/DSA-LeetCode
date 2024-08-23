@@ -1,16 +1,14 @@
-
 class Solution {
-    private int moves = 0;   
-    private int dfs(TreeNode node) {
-        if (node == null) return 0;
-        int left_excess = dfs(node.left);
-        int right_excess = dfs(node.right);
-        moves += Math.abs(left_excess) + Math.abs(right_excess);
-        return node.val + left_excess + right_excess - 1;
+    int res = 0;
+    public int solve(TreeNode root){
+        if(root==null) return 0;
+        int l = solve(root.left);
+        int r = solve(root.right);
+        res+=Math.abs(l)+Math.abs(r);
+        return l+r+root.val-1;
     }
-
     public int distributeCoins(TreeNode root) {
-        dfs(root);
-        return moves;
+        solve(root);
+        return res;
     }
 }
