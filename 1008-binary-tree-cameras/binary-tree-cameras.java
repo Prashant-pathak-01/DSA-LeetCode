@@ -5,7 +5,6 @@ class Solution {
         if(root.left==null && root.right==null) return 0;
         int left = solve(root.left);
         int right = solve(root.right);
-        System.out.println(left+" "+right);
         if(left==0 || right==0){
             count++;
             return 1;
