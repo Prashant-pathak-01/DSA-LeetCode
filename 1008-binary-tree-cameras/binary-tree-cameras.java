@@ -1,19 +1,22 @@
 class Solution {
-    int count =0;
+    int res =0 ;
     public int solve(TreeNode root){
-        if(root==null) return -1;
-        if(root.left==null && root.right==null) return 0;
+        if(root==null) return 0;
+        if(root.left==null && root.right==null) return -1;
         int left = solve(root.left);
         int right = solve(root.right);
-        if(left==0 || right==0){
-            count++;
+        if(left==-1 || right==-1) {
+            res++;
             return 1;
         }
-        if(left==1 || right==1) return 2;
-        return 0;
+        if(left==1 || right==1){
+            return 0;
+        }
+        return -1;
 
     }
     public int minCameraCover(TreeNode root) {
-        return (solve(root)==0?1:0)+count;
+        int temp = solve(root);
+        return (temp==-1?1:0)+res;
     }
 }
