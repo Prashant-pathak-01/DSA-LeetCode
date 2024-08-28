@@ -8,10 +8,7 @@ class Solution {
         }
         int left = solve(root.left);
         int right = solve(root.right);
-        res = Math.max(res,root.val+right);
-        res = Math.max(res,root.val+left);
-        res = Math.max(res,root.val);
-        res = Math.max(res,left+right+root.val);
+        res = Math.max(res,Math.max(root.val,Math.max(left+right+root.val,root.val+Math.max(left,right))));
         return Math.max(0,root.val+Math.max(left,right));
     }
     public int maxPathSum(TreeNode root) {
