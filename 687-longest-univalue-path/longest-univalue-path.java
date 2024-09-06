@@ -6,9 +6,9 @@ class Solution {
     }
     public int longestUnivaluePath(TreeNode root) {
         if(root==null) return 0;
-        int h = height(root.left,root.val)+height(root.right,root.val);
-        int l = longestUnivaluePath( root.left);
-        int r = longestUnivaluePath( root.right); 
-        return Math.max(h,Math.max(l,r));
+        int height = height(root.left,root.val)+height(root.right,root.val);
+        int left = longestUnivaluePath(root.left);
+        int right = longestUnivaluePath(root.right);
+        return Math.max(height,Math.max(left,right));
     }
 }
