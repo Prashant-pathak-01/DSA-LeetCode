@@ -1,7 +1,11 @@
 class Solution {
     public int getLen(ListNode head){
-        if(head==null) return 0;
-        return 1+getLen(head.next);
+        int count =0;
+        while(head!=null) {
+            head = head.next;
+            count++;
+        }
+        return count;
     }
     public TreeNode getNode(ListNode head, int i){
         while(i-->0) head = head.next;
