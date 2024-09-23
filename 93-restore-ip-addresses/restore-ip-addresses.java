@@ -5,7 +5,7 @@ class Solution {
             if(count==4 && isValid(res.substring(1))) list.add(res.substring(1));
             return;
         }
-        for(int x=i; x<s.length(); x++){
+        for(int x=i; x<Math.min(i+3,s.length()); x++){
             generate(s,list,x+1,count+1,res+"."+s.substring(i,x+1));
         }
     }
