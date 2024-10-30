@@ -6,7 +6,8 @@ class Solution {
         for(int i=folder.length-1; i>=0; i--){
             boolean flag = true;
             for(int j=i-1; j>=0; j--){
-                if(folder[i].length()>folder[j].length() && folder[i].substring(0,folder[j].length()).equals(folder[j]) && folder[i].charAt(folder[j].length())=='/') {
+                if(folder[i].charAt(0)!=folder[j].charAt(0)) break;
+                else if(folder[i].length()>folder[j].length() && folder[i].substring(0,folder[j].length()).equals(folder[j]) && folder[i].charAt(folder[j].length())=='/') {
                         flag = false;
                         break;
                 }
