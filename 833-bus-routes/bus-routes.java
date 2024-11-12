@@ -36,7 +36,7 @@ class Solution {
                 map.put(routes[i][j],list);
             }
         }
-        if(!map.containsKey(source)) return -1;
+        if(!map.containsKey(source) ||!map.containsKey(target) ) return -1;
         return solve(map,routes,source,target);
     }
 }
