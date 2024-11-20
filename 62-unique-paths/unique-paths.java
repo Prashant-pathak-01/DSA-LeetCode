@@ -1,13 +1,14 @@
 class Solution {
-    public int paths(int m,int n, int count, int [][]dp) {
-        if(m==1 && n==1) return 1;
-        if(m==0 || n==0) return 0;
-        if(dp[m-1][n-1]!=0) return dp[m-1][n-1];
-        return dp[m-1][n-1] = paths(m-1,n,count,dp)+paths(m,n-1,count,dp);
-    }
     public int uniquePaths(int m, int n) {
-        int count = 0;
-        int dp[][] = new int[m][n];
-        return paths(m,n,count,dp);
+        int arr[][] = new int[m][n];
+        for(int i=0; i<m; i++) arr[i][0] = 1 ;
+        for(int i=0; i<n; i++) arr[0][i] = 1 ; 
+        for(int i=1; i<m;i++ ){
+            for(int j=1; j<n; j++){
+                arr[i][j] = arr[i-1][j]+arr[i][j-1];
+            }
+        }
+        return arr[m-1][n-1];
+
     }
 }
