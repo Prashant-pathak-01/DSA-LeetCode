@@ -9,7 +9,7 @@ class Solution {
             map.put(i, map.getOrDefault(i,0)+1);
         }
         for(int i=nums.length-1; i>=0; i--) {
-            System.out.println((sum-nums[i])+" "+nums[i]);
+            //System.out.println((sum-nums[i])+" "+nums[i]);
             if((sum-nums[i])%2==0 && map.containsKey((sum-nums[i])/2)) {
                 if(nums[i]==(sum-nums[i])/2) {
                     if(map.get((sum-nums[i])/2)>1) res = Math.max(res,nums[i]);
