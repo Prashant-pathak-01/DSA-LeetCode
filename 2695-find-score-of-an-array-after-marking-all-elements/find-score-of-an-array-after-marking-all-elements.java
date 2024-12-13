@@ -16,12 +16,11 @@ class Solution {
         while(!pq.isEmpty()){
             Pair temp = pq.poll();
             //System.out.println(temp.x+" "+temp.y);
-            if(!set.contains(temp.index)){
+            if(nums[temp.index]>0){
                 res+=temp.val;
-                set.add(temp.index-1);
-                set.add(temp.index+1);
-                set.add(temp.index);
-
+                if(temp.index>0) nums[temp.index-1]=0;
+                nums[temp.index]=0;
+                if(temp.index+1<nums.length) nums[temp.index+1]=0;
             }
         }
         return res;
