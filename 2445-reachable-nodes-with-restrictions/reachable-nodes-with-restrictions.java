@@ -1,9 +1,10 @@
 class Solution {
-    public int solve(Map<Integer,List<Integer>> map, Set<Integer> set,int node,Set<Integer> visited){
-        if(set.contains(node) || visited.contains(node)) return 0;
-        visited.add(node);
+    public int solve(Map<Integer,List<Integer>> map, Set<Integer> set,int node,int parent){
+        if(set.contains(node)) return 0;
         int res =1;
-        for(int x:map.get(node)) res+=solve(map,set,x,visited);
+        for(int x:map.get(node)) {
+            if(x!=parent) res+=solve(map,set,x,node);
+        }
         return res;
     }
     public int reachableNodes(int n, int[][] edges, int[] restricted) {
@@ -19,7 +20,7 @@ class Solution {
         }
         Set<Integer> set = new HashSet<>();
         for(int i:restricted) set.add(i);
-        return solve(map,set,0,new HashSet<>());
+        return solve(map,set,0,-1);
         
     }
 }
