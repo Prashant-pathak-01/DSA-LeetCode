@@ -12,8 +12,8 @@ class Solution {
                     q.add(i);
                     visited[i] = true;
                 }
-                max =i;
             }
+            max =Math.min(temp+maxJump,s.length()-1);
         }
         return false;
     }
