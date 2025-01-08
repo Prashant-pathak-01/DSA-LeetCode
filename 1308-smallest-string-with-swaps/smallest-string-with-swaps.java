@@ -1,9 +1,14 @@
 class Solution {
     class Union{
         int parent[];
+        int size[];
         Union(int n){
             parent = new int[n];
-            for(int i=0; i<n; i++) parent[i] = i;
+            size = new int[n];
+            for(int i=0; i<n; i++) {
+                parent[i] = i;
+                size[i] = 1;
+            }
         }
         public int find(int x){
             if(parent[x]!=x) return parent[x] = find(parent[x]);
@@ -14,7 +19,13 @@ class Solution {
             int b = find(y);
             if(a!=b){
                 // System.out.println(a+" "+b);
-                parent[b] = a;
+                if(size[a]>size[b]){
+                    parent[b] = a;
+                    size[a]+=size[b];
+                }else {
+                    parent[a] = b;
+                    size[b]+=size[a];
+                }
             }
         }
         public void rootParent(){
