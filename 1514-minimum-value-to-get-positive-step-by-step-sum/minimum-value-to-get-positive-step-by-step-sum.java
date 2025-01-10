@@ -1,11 +1,10 @@
 class Solution {
     public int minStartValue(int[] nums) {
-        int sum =0;
-        int res= 1;
-        for(int i:nums){
-            sum+=i;
-            if(sum<0) res = Math.max(res,Math.abs(sum)+1);
+        for(int i=1; i<nums.length; i++){
+            nums[i]+=nums[i-1];
         }
-        return res;
+        Arrays.sort(nums);
+        // System.out.println(Arrays.toString(nums));
+        return nums[0]>0?1:nums[0]*-1+1;
     }
 }
