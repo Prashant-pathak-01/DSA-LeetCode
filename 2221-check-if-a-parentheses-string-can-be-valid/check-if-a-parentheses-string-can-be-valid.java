@@ -1,41 +1,25 @@
 class Solution {
     public boolean canBeValid(String s, String lock) {
         if(s.length()%2==1) return false;
-        int open =0;
-        boolean flag = true;
+        Stack<Integer> gift = new Stack<>();
+        Stack<Integer> open = new Stack<>();
         for(int i=0; i<s.length(); i++){
-            if(lock.charAt(i)=='0'){
-                open++;
-            }else{
-                // can not verify if open is locked.
-                if(s.charAt(i)==')') {
-                    if(open==0){
-                        flag = false;
-                        break;
-                    }
-                    open--;
-                }
-                else open++;
+            if(lock.charAt(i)=='0') gift.push(i);
+            else{
+                if(s.charAt(i)=='(') open.add(i);
+                else if(!open.isEmpty()){
+                    open.pop();
+                }else if(!gift.isEmpty()) {
+                    gift.pop();
+                }else return false;
             }
         }
-
-        if(!flag) return false;
-        open =0;
-        for(int i=s.length()-1; i>=0; i--){
-            if(lock.charAt(i)=='0'){
-                open++;
-            }else{
-                // can not verify if open is locked.
-                if(s.charAt(i)=='('){
-                    if(open==0){
-                        flag = false;
-                        break;
-                    }
-                    open--;
-                }
-                else open++;
-            }
+        while(!open.isEmpty()){
+            if(gift.isEmpty()) return false;
+            if(gift.peek()<open.peek()) return false;
+            gift.pop();
+            open.pop();
         }
-        return flag;
+        return gift.size()%2==0;
     }
 }
