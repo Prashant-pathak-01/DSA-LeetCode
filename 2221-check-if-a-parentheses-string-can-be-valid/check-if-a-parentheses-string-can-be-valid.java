@@ -1,30 +1,41 @@
 class Solution {
     public boolean canBeValid(String s, String lock) {
         if(s.length()%2==1) return false;
-        int locked = 0;
-        int unlocked =0;
+        int open =0;
+        boolean flag = true;
         for(int i=0; i<s.length(); i++){
-            if(s.charAt(i)=='(' || lock.charAt(i)=='0'){
-                if(lock.charAt(i)=='0') unlocked++;
-                else locked++;
+            if(lock.charAt(i)=='0'){
+                open++;
             }else{
-                if(locked>0) locked--;
-                else if(unlocked>0) unlocked--;
-                else return false;
+                // can not verify if open is locked.
+                if(s.charAt(i)==')') {
+                    if(open==0){
+                        flag = false;
+                        break;
+                    }
+                    open--;
+                }
+                else open++;
             }
         }
-        locked = 0;
-        unlocked =0;
-        for(int i=s.length()-1; i>=0;  i--){
-            if(s.charAt(i)==')' || lock.charAt(i)=='0'){
-                if(lock.charAt(i)=='0') unlocked++;
-                else locked++;
+
+        if(!flag) return false;
+        open =0;
+        for(int i=s.length()-1; i>=0; i--){
+            if(lock.charAt(i)=='0'){
+                open++;
             }else{
-                if(locked>0) locked--;
-                else if(unlocked>0) unlocked--;
-                else return false;
+                // can not verify if open is locked.
+                if(s.charAt(i)=='('){
+                    if(open==0){
+                        flag = false;
+                        break;
+                    }
+                    open--;
+                }
+                else open++;
             }
         }
-        return true;
+        return flag;
     }
 }
