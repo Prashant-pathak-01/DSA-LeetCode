@@ -8,19 +8,19 @@ class Solution {
         }
     }
     public int firstCompleteIndex(int[] arr, int[][] mat) {
-        int r[] = new int[mat.length];
-        int c[] = new int[mat[0].length];
-        Map<Integer,Pair> map = new HashMap<>();
+        Pair counter[] = new Pair[mat.length*mat[0].length];
         for(int i=0; i<mat.length; i++){
             for(int j=0; j<mat[0].length; j++){
-                map.put(mat[i][j],new Pair(i,j));
+                counter[mat[i][j]-1] = new Pair(i,j);
             }
         }
+        int r[] = new int[mat.length];
+        int c[] = new int[mat[0].length];
         for(int i=0; i<arr.length; i++){
-            r[map.get(arr[i]).i]++;
-            c[map.get(arr[i]).j]++;
-            if(r[map.get(arr[i]).i]==mat[0].length) return i;
-            if(c[map.get(arr[i]).j]==mat.length) return i;
+            r[counter[arr[i]-1].i]++;
+            if(r[counter[arr[i]-1].i]==mat[0].length) return i;
+            c[counter[arr[i]-1].j]++;
+            if(c[counter[arr[i]-1].j]==mat.length) return i;
 
         }
         return -1;
