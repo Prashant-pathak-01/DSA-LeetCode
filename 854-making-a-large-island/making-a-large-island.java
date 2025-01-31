@@ -1,72 +1,59 @@
 class Solution {
+    class Pair{
+        int i;
+        int j;
+        Pair(int i, int j){
+            this.i = i;
+            this.j = j;
+        }
+    }
     class Union{
-        String parent[][];
+        Pair parent[][];
         int size[][];
         int grid[][];
         Union(int n, int m, int grid[][]){
             this.grid = grid;
-            parent = new String[n][m];
+            parent = new Pair[n][m];
             size = new int[n][m];
             for(int i=0; i<n; i++){
                 for(int j=0; j<m; j++){
-                    parent[i][j] = i+" "+j;
+                    parent[i][j] = new Pair(i,j);
                     size[i][j] = 1;
                 }
             }
         }
 
-        public String find(int i, int j){
-            if(!parent[i][j].equals(i+" "+j)) {
-                String str[] = parent[i][j].split(" ");
-                return parent[i][j] = find(Integer.parseInt(str[0]),Integer.parseInt(str[1]));
+        public Pair find(int i, int j){
+            if(parent[i][j].i!=i || parent[i][j].j!=j) {
+                return parent[i][j] = find(parent[i][j].i,parent[i][j].j);
             } else return parent[i][j];
         }
         public int merge(int i, int j){
-            Set<String> set = new HashSet<>();
-            if(i-1>=0 && grid[i-1][j]==1) set.add(find(Integer.parseInt(parent[i-1][j].split(" ")[0]),Integer.parseInt(parent[i-1][j].split(" ")[1])));
-            //if(i+1<parent.length && grid[i+1][j]==1) set.add(parent[i+1][j]);                 
-            if(j-1>=0 && grid[i][j-1]==1) set.add(find(Integer.parseInt(parent[i][j-1].split(" ")[0]),Integer.parseInt(parent[i][j-1].split(" ")[1]))); 
-            //if(j+1>=0 && grid[i][j+1]==1) set.add(parent[i][j+1]); 
-            String myParent = find(i,j);
-            for(String str : set){
-                String arr[] = str.split(" ");
-                // String p1  = find(Integer.parseInt(arr[0]),Integer.parseInt(arr[1]));
-                //System.out.println(p1);
-                size[Integer.parseInt(myParent.split(" ")[0])][Integer.parseInt(myParent.split(" ")[1])] += size[Integer.parseInt(arr[0])][Integer.parseInt(arr[1])];
-                parent[Integer.parseInt(arr[0])][Integer.parseInt(arr[1])] = myParent;
-                //System.out.println(parent[Integer.parseInt(p1.split(" ")[0])][Integer.parseInt(p1.split(" ")[1])]+" "+str);
+            Set<Pair> set = new HashSet<>();
+            if(i-1>=0 && grid[i-1][j]==1) set.add(find(parent[i-1][j].i,parent[i-1][j].j));
+            if(j-1>=0 && grid[i][j-1]==1) set.add(find(parent[i][j-1].i,parent[i][j-1].j));
+            Pair myParent = find(i,j);
+            for(Pair pair : set){
+                size[myParent.i][myParent.j] += size[pair.i][pair.j];
+                parent[pair.i][pair.j] = myParent;
             }
-            return size[Integer.parseInt(myParent.split(" ")[0])][Integer.parseInt(myParent.split(" ")[1])];
+            return size[myParent.i][myParent.j];
         }
 
 
         public int calculate(int i, int j){
-            Set<String> set = new HashSet<>();
-            if(i-1>=0 && grid[i-1][j]==1) set.add(find(Integer.parseInt(parent[i-1][j].split(" ")[0]),Integer.parseInt(parent[i-1][j].split(" ")[1])));
-            if(i+1<parent.length && grid[i+1][j]==1) set.add(find(Integer.parseInt(parent[i+1][j].split(" ")[0]),Integer.parseInt(parent[i+1][j].split(" ")[1])));                 
-            if(j-1>=0 && grid[i][j-1]==1) set.add(find(Integer.parseInt(parent[i][j-1].split(" ")[0]),Integer.parseInt(parent[i][j-1].split(" ")[1])));
-            if(j+1<parent[0].length && grid[i][j+1]==1) set.add(find(Integer.parseInt(parent[i][j+1].split(" ")[0]),Integer.parseInt(parent[i][j+1].split(" ")[1])));
-            String myParent = find(i,j);
+            Set<Pair> set = new HashSet<>();
+            if(i-1>=0 && grid[i-1][j]==1) set.add(find(parent[i-1][j].i,parent[i-1][j].j));
+            if(i+1<parent.length && grid[i+1][j]==1) set.add(find(parent[i+1][j].i,parent[i+1][j].j));                 
+            if(j-1>=0 && grid[i][j-1]==1) set.add(find(parent[i][j-1].i,parent[i][j-1].j));
+            if(j+1<parent[0].length && grid[i][j+1]==1) set.add(find(parent[i][j+1].i,parent[i][j+1].j));
+            Pair myParent = find(i,j);
             int res = 1;
-            for(String str : set){
-                String arr[] = str.split(" ");
-                //String p1  = find(Integer.parseInt(arr[0]),Integer.parseInt(arr[1]));
-                //System.out.println(p1);
-                res+= size[Integer.parseInt(arr[0])][Integer.parseInt(arr[1])];
-                //System.out.println(parent[Integer.parseInt(p1.split(" ")[0])][Integer.parseInt(p1.split(" ")[1])]+" "+str);
-            }
+            for(Pair p : set) res+= size[p.i][p.j];
             return res;
         }
-
-
-
-        public void print(){
-            for(String str[]: parent){
-                System.out.println(Arrays.toString(str));
-            }
-        }
-
     }
+
     public int largestIsland(int[][] grid) {
         Union uf = new Union(grid.length, grid[0].length,grid);
         int res =0;
@@ -74,7 +61,6 @@ class Solution {
             for(int j=0; j<grid.length; j++){
                 if(grid[i][j]==1){
                     res = Math.max(res,uf.merge(i,j));
-                    //System.out.println(res);
                 }
             }
         }
@@ -86,9 +72,6 @@ class Solution {
                 }
             }
         }  
-        
-        //uf.print();
-
         return res; 
     }
 }
