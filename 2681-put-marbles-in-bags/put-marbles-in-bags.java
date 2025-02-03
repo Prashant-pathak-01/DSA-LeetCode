@@ -1,22 +1,22 @@
 class Solution {
     public long putMarbles(int[] weights, int k) {
-        PriorityQueue<Long> pq = new PriorityQueue<>(); 
+        PriorityQueue<Long> pqMin = new PriorityQueue<>(); 
+        PriorityQueue<Long> pqMax = new PriorityQueue<>(Collections.reverseOrder()); 
         for(int i=0; i<weights.length-1; i++){
-            pq.add((long)weights[i]+weights[i+1]);
+            pqMin.add((long)weights[i]+weights[i+1]);
+            pqMax.add((long)weights[i]+weights[i+1]);
+            if(pqMin.size()>=k) {
+                pqMin.poll();
+                pqMax.poll();
+            }
         }
-        long max =0;
         long min =0;
-        k--;
-        int c =k;
-        while(!pq.isEmpty()){
-            long temp = pq.poll();
-            if(k>0){
-                min+=temp;
-                k--;
-            }
-            if(pq.size()<c){
-                max+=temp;
-            }
+        long max =0;
+        
+        while(!pqMin.isEmpty()){
+            max+=pqMin.poll();
+            min+=pqMax.poll();
+
         }
         return max-min;
 
