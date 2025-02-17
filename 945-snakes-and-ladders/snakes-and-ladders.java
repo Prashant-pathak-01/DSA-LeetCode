@@ -2,7 +2,7 @@ class Solution {
     public int[] getCor(int num, int n){
         int row = n - (num - 1) / n - 1;
         int col = (num - 1) % n;
-        if (row % 2 == n % 2) {
+        if (row % 2 ==n%2) {
             return new int[]{row, n - 1 - col};
         } else {
             return new int[]{row, col};
