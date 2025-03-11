@@ -16,9 +16,6 @@ class Solution {
             int ans = -1;
             while(l<=r){
                 mid = (l+r)/2;
-                if(arr[i][2]==1){
-                    System.out.println(mid);
-                }
                 if(arr[mid][0]>=tar){
                     ans = arr[mid][2];
                     r = mid-1;
