@@ -1,9 +1,9 @@
 class Solution {
-    int MOD = (int)1e9+7;
+    int MOD = (int) 1e9+7;
     public int solve(int n, int x, int i, int dp[][]){
         if(n==0) return 1;
         if(n<0) return 0;
-        if(i>n) return 0;
+        if(Math.pow(i,x)>n) return 0;
         if(dp[i][n]!=-1) return dp[i][n];
         int take = solve(n-(int)Math.pow(i,x),x,i+1,dp);
         int nottake = solve(n,x,i+1,dp);
