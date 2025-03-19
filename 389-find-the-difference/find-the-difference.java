@@ -3,10 +3,9 @@ class Solution {
         int xor = 0;
         for(int i=0; i<s.length(); i++){
             xor^=(int)s.charAt(i);
-        }
-        for(int i=0; i<t.length(); i++){
             xor^=(int)t.charAt(i);
         }
+        xor^=(int)t.charAt(t.length()-1);
         return (char)xor;
     }
 }
