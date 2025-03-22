@@ -12,7 +12,6 @@ public:
                 }
             }
         }
-        for(auto i:set) cout<<i<<"\n";
         return set.size();
     }
 };
