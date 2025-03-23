@@ -7,12 +7,12 @@ struct Compare{
 class Solution {
 public:
     int countPaths(int n, vector<vector<int>>& roads) {
-        vector<vector<pair<long long,long long>>> map(n);
+        vector<vector<pair<long long, long long>>> map(n);
         for(auto path:roads){
             map[path[0]].push_back({path[1],path[2]});
             map[path[1]].push_back({path[0],path[2]});
         }
-        priority_queue<pair<long long,long long>,vector<pair<long long,long long>>, Compare> pq;
+        priority_queue<pair<long long, long long>,vector<pair<long long, long long>>, Compare> pq;
         pq.push({0,0});
         vector<long long> max_dist(n,LLONG_MAX);
         max_dist[0] = 0;
@@ -20,7 +20,7 @@ public:
         max_ways[0] = 1;
         int mod = 1e9+7;
         while(!pq.empty()){
-            pair<long long,long long> temp = pq.top();
+            pair<long long, long long> temp = pq.top();
             pq.pop();
             if(max_dist[temp.first]<temp.second) continue;
             for(auto i:map[temp.first]){
