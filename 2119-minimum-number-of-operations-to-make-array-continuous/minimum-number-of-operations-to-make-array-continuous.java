@@ -1,12 +1,28 @@
 class Solution {
+    public int solve(int arr[], int i, int n){
+        int left  = i;
+        int right = arr.length-1;
+        int target = arr[i]+n-1;
+        int res =0;
+        while(left<=right){
+            int mid = (left+right)/2;
+            if(arr[mid]<=target) {
+                res = mid;
+                left = mid+1;
+            }else right = mid-1;
+        }
+        return res-i+1;
+    }
     public int minOperations(int[] nums) {
-        Arrays.sort(nums);
-        int len = 1;
-        for(int i=1; i<nums.length; i++) if(nums[i]!=nums[i-1]) nums[len++] = nums[i];
-        int res= 0;
-        for(int i=0,j=0; i<len; i++){
-            while(j<len && nums[j]<=nums[i]+nums.length-1) j++;
-            res = Math.max(res,j-i);
+        Set<Integer> set = new HashSet<>();
+        for(int i:nums) set.add(i);
+        int arr[] = new int[set.size()];
+        int x =0;
+        for(int i:set) arr[x++] = i;
+        Arrays.sort(arr);
+        int res = 0;
+        for(int i=0; i<arr.length; i++){
+            res = Math.max(res,solve(arr,i,nums.length));
         }
         return nums.length-res;
     }
