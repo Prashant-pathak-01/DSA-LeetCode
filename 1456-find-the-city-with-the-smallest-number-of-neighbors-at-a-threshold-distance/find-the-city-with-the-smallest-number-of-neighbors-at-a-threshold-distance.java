@@ -43,7 +43,6 @@ class Solution {
         int min = Integer.MAX_VALUE;
         for(int i=0; i<n; i++){
             int count = calculate(map,i,distanceThreshold,n);
-            System.out.println(count);
             if(count<=min) {
                 min = count;
                 res = i;
