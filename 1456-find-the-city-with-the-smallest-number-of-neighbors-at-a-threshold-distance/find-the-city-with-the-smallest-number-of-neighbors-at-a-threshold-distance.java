@@ -1,38 +1,55 @@
 class Solution {
-    public void checkDistance(int i, int dis[], List<List<int []>> list){
-        Queue<int []> q = new LinkedList<>();
-        q.add(new int[]{i,0});
+    class Node{
+        int node;
+        int dist;
+        Node(int node, int dist){
+            this.node = node;
+            this.dist = dist;
+        }
+    }
+    public int calculate(Map<Integer,List<Node>> map, int curr, int dist, int n){
+        boolean visited[] = new boolean[n];
+        int minDist[] = new int[n];
+        Arrays.fill(minDist,Integer.MAX_VALUE);
+        Queue<Node> q = new LinkedList<>();
+        q.add(new Node(curr,0));
         while(!q.isEmpty()){
-            int temp[] = q.poll();
-            for(int x[]: list.get(temp[0])){
-                if(dis[x[0]]>temp[1]+x[1]){
-                    dis[x[0]] = temp[1]+x[1];
-                    q.add(new int[]{x[0],temp[1]+x[1]});
+            Node temp = q.poll();
+            visited[temp.node] = true;
+            List<Node> list = map.getOrDefault(temp.node,new ArrayList<>());
+            for(Node i:list){
+                if((!visited[i.node] || minDist[i.node]>temp.dist+i.dist) && temp.dist+i.dist<=dist) {
+                    q.add(new Node(i.node,i.dist+temp.dist));
+                    minDist[i.node] = temp.dist+i.dist;
                 }
             }
         }
+        int count =0;
+        for(boolean i:visited) if(i) count++;
+        return count-1;
     }
     public int findTheCity(int n, int[][] edges, int distanceThreshold) {
-        List<List<int []>> list =  new ArrayList<>();
-        for(int i=0; i<n; i++) list.add(new ArrayList<>());
+        Map<Integer,List<Node>> map = new HashMap<>();
         for(int i=0; i<edges.length; i++){
-            list.get(edges[i][0]).add(new int[]{edges[i][1],edges[i][2]});
-            list.get(edges[i][1]).add(new int []{edges[i][0],edges[i][2]});
+            List<Node> list1 = map.getOrDefault(edges[i][0],new ArrayList<>());
+            list1.add(new Node(edges[i][1],edges[i][2]));
+            List<Node> list2 = map.getOrDefault(edges[i][1],new ArrayList<>());
+            list2.add(new Node(edges[i][0],edges[i][2]));
+            map.put(edges[i][0],list1);
+            map.put(edges[i][1],list2);
         }
+
+        int res = Integer.MAX_VALUE;
         int min = Integer.MAX_VALUE;
-        int res= -1;
         for(int i=0; i<n; i++){
-            int dis[] = new int[n];
-            Arrays.fill(dis,Integer.MAX_VALUE);
-            dis[i] = 0;
-            checkDistance(i,dis,list);
-            int count = 0;
-            for(int x:dis) if(x<=distanceThreshold) count++;
-            if(min>=count) {
-                res = i;
+            int count = calculate(map,i,distanceThreshold,n);
+            System.out.println(count);
+            if(count<=min) {
                 min = count;
+                res = i;
             }
         }
         return res;
+
     }
 }
