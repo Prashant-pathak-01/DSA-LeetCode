@@ -40,7 +40,7 @@ class Solution {
         for(int i=0; i<nums.length; i++){
             long lcm = lcm(i>0?lcmPre[i-1]:1,i<nums.length-1?lcmPost[i+1]:1);
             long hcf = nums.length==1?nums[i]:(i>0 && i<nums.length-1)?hcf(hcfPre[i-1],hcfPost[i+1]):i==0?hcfPost[i+1]:hcfPre[i-1];
-            System.out.println(lcm+" "+hcf);
+            //System.out.println(lcm+" "+hcf);
             res = Math.max(res,hcf*lcm);
         }
 
