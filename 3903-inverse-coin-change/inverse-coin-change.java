@@ -2,7 +2,6 @@ class Solution {
     public int calculateWays(int total,int i, List<Integer> list, int dp[][]){
         if(i>=list.size()) return 0;
         if(total==0) return 1;
-        else if(total<0) return 0;
         if(dp[total][i]!=-1) return dp[total][i];
         int take  =0;
         if(total>=list.get(i)) take = calculateWays(total-list.get(i),i,list,dp);
